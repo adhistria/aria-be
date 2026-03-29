@@ -1,0 +1,52 @@
+basePath: /api/v1
+definitions:
+  entity.AppConfig:
+    properties:
+      api_base_url:
+        type: string
+      current_app_version:
+        type: string
+      features:
+        $ref: '#/definitions/entity.Features'
+      latest_app_version:
+        type: string
+      minimum_required_version:
+        type: string
+    type: object
+  entity.Features:
+    properties:
+      ai_chat:
+        type: boolean
+      biometric_login:
+        type: boolean
+      dark_mode:
+        type: boolean
+      push_notifications:
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Aria Backend API
+  title: Aria BE API
+  version: "1.0"
+paths:
+  /app-config:
+    get:
+      description: Returns the current app configuration including version info and
+        feature flags
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.AppConfig'
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get application configuration
+      tags:
+      - app-config
+swagger: "2.0"

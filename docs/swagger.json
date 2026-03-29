@@ -1,0 +1,78 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Aria Backend API",
+        "title": "Aria BE API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/app-config": {
+            "get": {
+                "description": "Returns the current app configuration including version info and feature flags",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "app-config"
+                ],
+                "summary": "Get application configuration",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.AppConfig"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "entity.AppConfig": {
+            "type": "object",
+            "properties": {
+                "api_base_url": {
+                    "type": "string"
+                },
+                "current_app_version": {
+                    "type": "string"
+                },
+                "features": {
+                    "$ref": "#/definitions/entity.Features"
+                },
+                "latest_app_version": {
+                    "type": "string"
+                },
+                "minimum_required_version": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Features": {
+            "type": "object",
+            "properties": {
+                "ai_chat": {
+                    "type": "boolean"
+                },
+                "biometric_login": {
+                    "type": "boolean"
+                },
+                "dark_mode": {
+                    "type": "boolean"
+                },
+                "push_notifications": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
